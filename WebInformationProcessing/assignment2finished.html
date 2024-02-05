@@ -1,0 +1,440 @@
+<!--Auther Keith Considine-->
+<!--Sudent Number 20448132-->
+<!--assignment runs as intended in chrome browser-->
+<html>
+    <body>
+        <style>
+            .item1 { grid-area: play; }  
+            .item2 { grid-area: buttonbox; }
+            .item3 { grid-area: svg; }
+            .item4 { grid-area: but1; }/*  creating diffrent grid regions for laying out my ui using css grid */
+            .item4 { grid-area: but3; }
+            .item4 { grid-area: but4; }
+            .item4 { grid-area: but5; }
+            .item4 { grid-area: but6; }
+            
+           
+            .grid-container {  /* creating the outer grid which laysout where my two buttonboxes will be and the svg/sourcecode*/
+            display: grid;
+            grid-template-areas: /* assigning elements to grids */
+                'play  svg'
+                'buttonbox  svg';
+            gap: 10px;
+            background-color: black;
+            padding: 20px;
+            }
+
+            .grid-container > div { /* styling the outer grid*/
+            background-color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 50px 0;
+            font-size: 30px;
+            }
+            .grid-but { /*creating grid for my animation buttons*/
+            display: grid;
+            grid-template-areas:
+                'but1 but2 but3'
+                'but4 but5 but6'
+                ;
+            gap: 10px;
+            background-color: black;
+            padding: 20px;
+            }
+
+            .grid-but > div { /*styling the grid for animation buttons*/
+            background-color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 50px 0;
+            font-size: 30px;
+            
+            }
+            .button1 { /*styling the animation buttons*/
+                background-color: rgb(255, 0, 0);
+                padding: 50px;
+                border-radius:50px;
+                text-align: center;
+                font-size: 20px;
+                color: white;
+            }
+            .buttonType2 { /*styling the other three buttons*/
+                background-color: rgb(125, 125, 153);
+                padding: 50px;
+                border-radius:50px;
+                text-align: center;
+                font-size: 20px;
+            }
+            .display{ 
+                display: block;
+            }                   /*I used a js function to swap add and remove these two classes to hide and display the svg source code*/
+            .hide{
+                display: none;
+            }
+        </style>
+<div class="grid-container"> <!--outer grid-->
+    <div class="item1">Settings<!-- settings area-->
+    <div class="grid-but"><!-- grid inside settings area-->
+        <div class="button"><button type="button" class="btn buttonType2" id="b" onclick="download()">Download</button></div> <!--Download button which calls download function to download the svg-->
+        <div class="button"><button type="button" class="btn buttonType2" id="b" onclick="logic()">Animate</button></div><!--this button calls function which runs any selected animations-->
+        <div class="button"><button type="button" class="btn buttonType2" id="b" onclick="svglogic()">SVG/Source</button></div><!--this button calls function to swap between svg and svg source code-->
+    </div>  
+  </div>
+    <div class="item2">Animations<!--animations area-->
+        <div class="grid-but"><!--grid inside animations area-->
+            <div class="button"><button type="button" class="btn button1" id="b0" onclick="settrue0()">One Eye</button></div>
+            <div class="button"><button type="button" class="btn button1" id="b1" onclick="settrue1()">Move Brows</button></div>
+            <div class="button"><button type="button" class="btn button1" id="b2" onclick="settrue2()">Move Pupils</button></div><!--each button calls a settrue function which selects an animation-->
+            <div class="button"><button type="button" class="btn button1" id="b3" onclick="settrue3()">Disco Eyes</button></div>
+            <div class="button"><button type="button" class="btn button1" id="b4" onclick="settrue4()">Move Eyes</button></div>
+            <div class="button"><button type="button" class="btn button1" id="b5" onclick="settrue5()">Vanish/Reappear</button></div>
+        </div>
+    </div>
+    <div class="item3"><!--svg/sourcecode area-->
+        <div id="sourcecode" class='hide'> <!--svg in text format, this is the svg source code which is displayed hidden by default with the .hide class --> 
+                 &lt;svg	id="thesvg"  width="400"	height="480"	viewBox="0	0	100	120" style="display: full"&gt;
+                 &lt;rect	 id="background"	 width="100"	 height="120"	 style="stroke-width:1;	stroke:black"/&gt;
+                 &lt;g	id="ghost"	transform="translate(0,0),	scale	(1.0)"&gt;
+                 &lt;path	 id="body"	 d="M	 10	 120	 A	 2.0	 5.8,	 0	 0	 1,	 90	 120"	 style="stroke:white;	 stroke-width:0.5;	fill:white"/&gt;
+                 &lt;g	id="eyes"	transform="rotate(0,50,40),	translate(0,0)"&gt;
+                 &lt;g   id="eye-l"	transform="rotate(0,50,40),	translate(0,0)"&gt;
+                 &lt;ellipse	 id="eye-l-ball"	 cx="45"	 cy="40"	 rx="4"	 ry="6"	 style="stroke:black;"/&gt;
+                 &lt;rect	transform="rotate(16,46,35)"	x="40"	y="33"	width="11"	height="6"	fill="white"	visibility="hidden"	/&gt;
+                 &lt;circle	id="eye-l-pupil"	cx="45"	cy="44"	r="0.5"	style="stroke:white;	fill:white"/&gt;
+                 &lt; g	id="eye-l-brow"&gt;
+                 &lt;path	 d="M	 41	 32	 Q	 45	 27	 49	 32"	 stroke="black"	 stroke-width="0.5"	fill="transparent"/&gt;
+                 &lt;path	 d="M	 41	 32	 Q	 45	 26	 49	 32"	 stroke="black"	 stroke-width="0.5"	fill="transparent"/&gt;
+                 &lt;/g&gt;
+                 &lt;/g&gt;
+                 &lt;g	id="eye-r"	transform="rotate(0,50,40),	translate(0,0)"&gt;
+                 &lt;ellipse	 id="eye-r-ball"	 cx="55"	 cy="40"	 rx="4"	 ry="6"	 style="stroke:black;"/&gt;
+                 &lt;rect	 transform="rotate(-16,56,35)"	 x="49"	 y="32"	 width="11"	 height="6"	fill="white"	visibility="hidden"	/&gt;
+                 &lt;circle	id="eye-r-pupil"	cx="55"	cy="44"	r="0.5"	style="stroke:white;	fill:white"/&gt;
+                 &lt;/g&gt;
+                 &lt;g id="eye-r-brow"&gt;
+                 &lt;path	 d="M	 51	 32	 Q	 55	 27	 59	 32"	 stroke="black"	 stroke-width="0.5"	fill="transparent"/&gt;
+                 &lt;path	 d="M	 51	 32	 Q	 55	 26	 59	 32"	 stroke="black"	 stroke-width="0.5"	fill="transparent"/&gt;
+                 &lt;/g&gt;
+                 &lt;/g&gt;
+                 &lt;/g&gt;
+                 &lt;/svg&gt;
+        </div>
+        <svg id="thesvg" width="600"	height="500"	viewBox="0	0	100	120"> <!--This is the svg containing the given ghost svg code and animations I created-->
+            <rect	 id="background"	 width="100"	 height="120"	 style="fill:black;	 stroke-width:1;  stroke:black">
+                <animate id="hideghost" attributeName="fill" begin="indefinite" dur ="3s" to="white" fill="freeze" ></animate> <!--animations to change the background color of the svg area-->
+                <animate id="showghost" attributeName="fill" begin="indefinite" dur ="4s" to="black" fill="freeze" ></animate><!--animations to change the background color of the svg area-->
+            </rect>
+          <g	id="ghost"	transform="rotate(0),	translate(0,0),	scale	(1.0)">
+                      <path	 id="body"	 d="M	 10	 120	 A	 2.0	 5.8,	 0	 0	 1,	 90	 120" style="stroke:white;	 strokewidth:0.5;	fill:white">
+                      </path>
+                  <g	id="eyes"	transform="rotate(0,50,40),	translate(0,0)">
+                          <g	id="eye-l"	transform="rotate(0,50,40),	translate(0,0)">
+                                          <ellipse	 id="eye-l-ball"	 cx="45"	 cy="40"	 rx="4"	 ry="6"	 style="stroke:black;	fill:black;">
+                                            <animate id="eyeani4" attributeName="cy" begin="indefinite" dur ="3s" to="75" fill="freeze" ></animate> <!--animation to move eye down-->
+                                            <animate id="eyeani4p2" attributeName="cy" begin="eyeani4.end+3s" dur ="3s" to="40" fill="freeze" ></animate><!--animation to move eye back up-->
+                                            <animate id="colorani" attributeName="fill" begin="indefinite" dur ="2s" to="blue" fill="freeze" ></animate><!--animations change eye to a variety of colours-->
+                                            <animate id="coloranip2" attributeName="fill" begin="colorani.end" dur ="2s" to="red" fill="freeze" ></animate><!--animations change eye to a variety of colours-->
+                                            <animate id="coloranip3" attributeName="fill" begin="coloranip2.end" dur ="2s" to="lime" fill="freeze" ></animate> <!--animations change eye to a variety of colours-->
+                                            <animate id="coloranip4" attributeName="fill" begin="coloranip3.end" dur ="2s" to="purple" fill="freeze" ></animate><!--animations change eye to a variety of colours-->
+                                            <animate id="coloranip5" attributeName="fill" begin="coloranip4.end" dur ="2s" to="cyan" fill="freeze" ></animate><!--animations change eye to a variety of colours-->
+                                            <animate id="coloraniend" attributeName="fill" begin="coloranip5.end" dur ="2s" to="black" fill="freeze" ></animate><!--animations change eye to a variety of colours-->
+                                            <animate id="oneEyeani2" attributeName="cx" begin="indefinite" dur ="3s" to="50" fill="freeze" ></animate> <!--animations to move eye to the center to create a one-eyed effect-->
+                                            <animate id="oneEyeani2p2" attributeName="cx" begin="indefinite" dur ="3s" to="45" fill="freeze" ></animate><!--animations to move eye to the center to create a one-eyed effect-->
+                                          </ellipse>
+                                  <rect	transform="rotate(16,46,35)"	x="40"	y="33"	width="11"	height="6"	fill="white"	visibility="hidden"	/>
+                                  <circle	id="eye-l-pupil"	cx="45"	cy="44"	r="0.5"	style="stroke:white;	fill:white">
+                                    <animate id="eyeani3" attributeName="cy" begin="indefinite" dur ="3s" to="77" fill="freeze" ></animate><!--animation to move eye down-->
+                                    <animate id="eyeani3p2" attributeName="cy" begin="eyeani4.end+3s" dur ="3s" to="44" fill="freeze" ></animate><!--animation to move eye back up-->
+                                    <animate id="oneEyeani4" attributeName="cx" begin="indefinite" dur ="3s" to="50" fill="freeze" ></animate><!--animations to move eye to the center to create a one-eyed effect-->
+                                    <animate id="oneEyeani4p2" attributeName="cx" begin="indefinite" dur ="3s" to="45" fill="freeze" ></animate><!--animations to move eye to the center to create a one-eyed effect-->
+                                    <animateMotion id="pupilani2" dur='1s' begin="indefinite" path = "M 0,0 Q 4,-1 4,-6 Q 0,-12 -4,-6 Q-4,-3, 0,0" repeatcount = "9" fill="freeze"/><!--animation to spin pupil in cirlces-->
+                                  </circle>
+                                  <g	id="eye-l-brow">
+                                                    <path	 d="M	 41	 32	 Q	 45	 27	 49	 32"	 stroke="black"	 stroke-width="0.5"	fill="transparent">
+                                                        <animateMotion id="browani3" dur='10s' begin="indefinite" path = "M0 0 Q-10 -25 0 0" fill="freeze"/><!--animation to move brow up and down-->
+                                                        <animateMotion id="oneEyebrowani3" dur='3s' begin="indefinite" path = "M0 0 Q5 0 5 0" fill="freeze"/><!--animations to move brow to the center to create a one-eyed effect-->
+                                                        <animateMotion id="oneEyebrowani3p2" dur='3s' begin="indefinite" path = "M5 0 Q0 0 0 0" fill="freeze"/><!--animations to move brow to the center to create a one-eyed effect-->
+                                                    </path>
+                                                    <path	 d="M	 41	 32	 Q	 45	 26	 49	 32"	 stroke="black"	 stroke-width="0.5"	fill="transparent">
+                                                        <animateMotion id="browani4" dur='10s' begin="indefinite" path = "M0 0 Q-10 -25 0 0" fill="freeze"/><!--animation to move brow up and down-->
+                                                        <animateMotion id="oneEyebrowani4" dur='3s' begin="indefinite" path = "M0 0 Q5 0 5 0" fill="freeze"/><!--animations to move brow to the center to create a one-eyed effect-->
+                                                        <animateMotion id="oneEyebrowani4p2" dur='3s' begin="indefinite" path = "M5 0 Q0 0 0 0" fill="freeze"/><!--animations to move brow to the center to create a one-eyed effect-->
+                                                    </path>
+                                  </g>
+                          </g>
+                          <g	id="eye-r"	transform="rotate(0,50,40),	translate(0,0)">
+                                          <ellipse	 id="eye-r-ball"	 cx="55"	 cy="40"	 rx="4"	 ry="6"	 style="stroke:black;	fill:black">
+                                            <animate id="eyeani1" attributeName="cy" begin="indefinite" dur ="3s" to="75" fill="freeze" ></animate><!--animation to move eye down-->
+                                            <animate id="eyeani1p2" attributeName="cy" begin="eyeani4.end+3s" dur ="3s" to="40" fill="freeze" ></animate><!--animation to move eye back up-->
+                                            <animate id="colorani2" attributeName="fill" begin="indefinite" dur ="2s" to="blue" fill="freeze" ></animate><!--animations change eye to a variety of colours-->
+                                            <animate id="colorani2p2" attributeName="fill" begin="colorani.end" dur ="2s" to="red" fill="freeze" ></animate><!--animations change eye to a variety of colours-->
+                                            <animate id="colorani2p3" attributeName="fill" begin="colorani2p2.end" dur ="2s" to="lime" fill="freeze" ></animate><!--animations change eye to a variety of colours-->
+                                            <animate id="colorani2p4" attributeName="fill" begin="colorani2p3.end" dur ="2s" to="purple" fill="freeze" ></animate><!--animations change eye to a variety of colours-->
+                                            <animate id="colorani2p5" attributeName="fill" begin="colorani2p4.end" dur ="2s" to="cyan" fill="freeze" ></animate><!--animations change eye to a variety of colours-->
+                                            <animate id="colorani2end" attributeName="fill" begin="colorani2p5.end" dur ="2s" to="black" fill="freeze" ></animate><!--animations change eye to a variety of colours-->
+                                            <animate id="oneEyeani1" attributeName="cx" begin="indefinite" dur ="3s" to="50" fill="freeze" ></animate><!--animations to move eye to the center to create a one-eyed effect-->
+                                            <animate id="oneEyeani1p2" attributeName="cx" begin="indefinite" dur ="3s" to="55" fill="freeze" ></animate><!--animations to move eye to the center to create a one-eyed effect-->
+                                          </ellipse>
+                                          <rect	 transform="rotate(-16,56,35)"	 x="49"	 y="32"	 width="11"	 height="6"	fill="white"	visibility="hidden"	/>
+                                  <circle	id="eye-r-pupil"	cx="55"	cy="44"	r="0.5"	style="stroke:white;	fill:white">
+                                    <animate id="eyeani2" attributeName="cy" begin="indefinite" dur ="3s" to="77" fill="freeze" ></animate><!--animation to move pupil down-->
+                                    <animate id="eyeani2p2" attributeName="cy" begin="eyeani4.end+3s" dur ="3s" to="44" fill="freeze" ></animate><!--animation to move pupil down-->
+                                    <animate id="oneEyeani3" attributeName="cx" begin="indefinite" dur ="3s" to="50" fill="freeze" ></animate><!--animations to move pupil to the center to create a one-eyed effect-->
+                                    <animate id="oneEyeani3p2" attributeName="cx" begin="indefinite" dur ="3s" to="55" fill="freeze" ></animate><!--animations to move pupil to the center to create a one-eyed effect-->
+                                    <animateMotion id="pupilani1" dur='1s' begin="indefinite" path = "M 0,0 Q 4,-1 4,-6 Q 0,-12 -4,-6 Q-4,-3, 0,0" repeatcount = "9" fill="freeze"/><!--animation to spin pupil in cirlces-->
+                                  </circle>
+                          </g>
+                          <g	id="eye-r-brow">
+                                          <path	 d="M	 51	 32	 Q	 55	 27	 59	 32"	 stroke="black"	 stroke-width="0.5"	fill="transparent">
+                                              <animateMotion id="browani1" dur='10s' begin="indefinite" path = "M0 0 Q10 -25 0 0" fill="freeze"/><!--animation to move brow up and down-->
+                                              <animateMotion id="oneEyebrowani1" dur='3s' begin="indefinite" path = "M0 0 Q-5 0 -5 0" fill="freeze"/><!--animations to move brow to the center to create a one-eyed effect-->
+                                              <animateMotion id="oneEyebrowani1p2" dur='3s' begin="indefinite" path = "M-5 0 Q0 0 0 0" fill="freeze"/><!--animations to move brow to the center to create a one-eyed effect-->
+                                          </path>
+                                          <path	 d="M	 51	 32	 Q	 55	 26	 59	 32"	 stroke="black"	 stroke-width="0.5"	fill="transparent">
+                                            <animateMotion id="browani2" dur='10s' begin="indefinite" path = "M0 0 Q10 -25 0 0" fill="freeze"/><!--animation to move brow up and down-->
+                                            <animateMotion id="oneEyebrowani2" dur='3s' begin="indefinite" path = "M0 0 Q-5 0 -5 0" fill="freeze"/><!--animations to move brow to the center to create a one-eyed effect-->
+                                            <animateMotion id="oneEyebrowani2p2" dur='3s' begin="indefinite" path = "M-5 0 Q0 0 0 0" fill="freeze"/><!--animations to move brow to the center to create a one-eyed effect-->
+                                          </path>
+                          </g>
+                  </g>
+          </g>
+  </svg></div></div>
+        <script>
+            var checklist = [false,false,false,false,false,false]; //array of booleans to store whether or not a animation is selected
+            var ishidden = false;//boolean to remember if background is white or black
+            var oneEyed = false;//boolean to remember if the ghost has one eye or two
+            const svg = document.getElementById('thesvg');//creating variable for the svg
+            const text = document.getElementById('sourcecode');//creating variable for the text for displaying the svg code
+            const b0 = document.getElementById('b0');//creating variable for button
+            const b1 = document.getElementById('b1');//creating variable for button
+            const b2 = document.getElementById('b2');//creating variable for button
+            const b3 = document.getElementById('b3');//creating variable for button
+            const b4 = document.getElementById('b4');//creating variable for button
+            const b5 = document.getElementById('b5');//creating variable for button
+            const logic = function(){//this function is called when the animate button is pressed, it plays all selected animations by checking each element of the checklist array
+                if(checklist[0]==true){
+                    oneEyemode();
+                }
+                if(checklist[1]==true){
+                    browmover();
+                }
+                if(checklist[2]==true){
+                    pupilSpin();
+                }
+                if(checklist[3]==true){   //each of these functions start an animation 
+                    discoEyes();
+                }
+                if(checklist[4]==true){
+                    moveEyes();
+                }
+                if(checklist[5]==true){
+                    ghosthider();
+                }
+            }
+            function download(){ 
+                //function for downloading the svg, this code I found and adapted from two stackoverflow posts, 
+                // https://stackoverflow.com/questions/23218174/how-do-i-save-export-an-svg-file-after-creating-an-svg-with-d3-js-ie-safari-an
+                // https://stackoverflow.com/questions/53054637/download-link-for-svg-kept-as-variable
+                // I took bits and pieces of code from both of these threads to get this working
+                var a = document.body.appendChild(
+                    document.createElement("a")
+                );
+                // svg data is the svg which is downloaded, it includes an animation for the pupils
+                let svgData = `<svg	xmlns="http://www.w3.org/2000/svg" width="400"	height="480"	viewBox="0	0	100	120">
+	 	 <rect	 id="background"	 width="100"	 height="120"	 style="fill:black;	 stroke-width:1;  stroke:black"/>
+		<g	id="ghost"	transform="rotate(0),	translate(0,0),	scale	(1.0)">
+	 	 	 	 <path	 id="body"	 d="M	 10	 120	 A	 2.0	 5.8,	 0	 0	 1,	 90	 120"	 style="stroke:white;	 strokewidth:0.5;	fill:white"/>
+				<g	id="eyes"	transform="rotate(0,50,40),	translate(0,0)">
+						<g	id="eye-l"	transform="rotate(0,50,40),	translate(0,0)">
+	 	 	 	 	 	 	 	 <ellipse	 id="eye-l-ball"	 cx="45"	 cy="40"	 rx="4"	 ry="6"	 style="stroke:black;	fill:black;"/>
+								<rect	transform="rotate(16,46,35)"	x="40"	y="33"	width="11"	height="6"	fill="white"	visibility="hidden"	/>
+								<circle	id="eye-l-pupil"	cx="45"	cy="44"	r="0.5"	style="stroke:white;	fill:white">
+                                    <animateMotion id="pupilani2" dur='5s' begin="1s" path = "M 0,0 Q 4,-1 4,-6 Q 0,-12 -4,-6 Q-4,-3, 0,0"  fill="freeze"/>
+                                </circle>
+								<g	id="eye-l-brow">
+	 	 	 	 	 	 	 	 	 	 <path	 d="M	 41	 32	 Q	 45	 27	 49	 32"	 stroke="black"	 stroke-width="0.5"	fill="transparent"/>
+	 	 	 	 	 	 	 	 	 	 <path	 d="M	 41	 32	 Q	 45	 26	 49	 32"	 stroke="black"	 stroke-width="0.5"	fill="transparent"/>
+								</g>
+						</g>
+						<g	id="eye-r"	transform="rotate(0,50,40),	translate(0,0)">
+	 	 	 	 	 	 	 	 <ellipse	 id="eye-r-ball"	 cx="55"	 cy="40"	 rx="4"	 ry="6"	 style="stroke:black;	fill:black"/>
+	 	 	 	 	 	 	 	 <rect	 transform="rotate(-16,56,35)"	 x="49"	 y="32"	 width="11"	 height="6"	fill="white"	visibility="hidden"	/>
+								<circle	id="eye-r-pupil"	cx="55"	cy="44"	r="0.5"	style="stroke:white;	fill:white">
+                                    <animateMotion id="pupilani1" dur='5s' begin="1s" path = "M 0,0 Q 4,-1 4,-6 Q 0,-12 -4,-6 Q-4,-3, 0,0" fill="freeze"/>
+                                </circle>
+						</g>
+						<g	id="eye-l-brow">
+	 	 	 	 	 	 	 	 <path	 d="M	 51	 32	 Q	 55	 27	 59	 32"	 stroke="black"	 stroke-width="0.5"	fill="transparent"/>
+	 	 	 	 	 	 	 	 <path	 d="M	 51	 32	 Q	 55	 26	 59	 32"	 stroke="black"	 stroke-width="0.5"	fill="transparent"/>
+						</g>
+				</g>
+		</g>
+</svg>`;
+                a.download = "ghost.svg"; //names the downlaod
+                a.href = 'data:image/svg+xml;base64,' + window.btoa(svgData); //creates download
+                a.click(); // Trigger a click on the element
+            }
+            const settrue0 = function(){     //each of these set true functions is linked to a button,
+                if(checklist[0] == true){   //upon the button being pressed an animation is either selected or deselected by its checklist value being set to true/false
+                    checklist[0] = false;   //the buttons colour is switched to either red or green to signify to the user if its selected
+                    b0.style.backgroundColor = 'red'; 
+                }
+                else{                  
+                    checklist[0] = true;
+                    b0.style.backgroundColor = 'lime';
+                }
+            }
+            const settrue1 = function(){
+                if(checklist[1] == true){
+                    checklist[1] = false;
+                    b1.style.backgroundColor = 'red';
+                }
+                else{
+                    checklist[1] = true;
+                    b1.style.backgroundColor = 'lime';
+                }
+            }
+            const settrue2 = function(){
+                if(checklist[2] == true){
+                    checklist[2] = false;
+                    b2.style.backgroundColor = 'red';
+                }
+                else{
+                    checklist[2] = true;
+                    b2.style.backgroundColor = 'lime';
+                }
+            }
+            const settrue3 = function(){
+                if(checklist[3] == true){
+                    checklist[3] = false;
+                    b3.style.backgroundColor = 'red';
+                }
+                else{
+                    checklist[3] = true;
+                    b3.style.backgroundColor = 'lime';
+                }
+            }
+            const settrue4 = function(){
+                if(checklist[4] == true){
+                    checklist[4] = false;
+                    b4.style.backgroundColor = 'red';
+                }
+                else{
+                    checklist[4] = true;
+                    b4.style.backgroundColor = 'lime';
+                }
+            }
+            const settrue5 = function(){
+                if(checklist[5] == true){
+                    checklist[5] = false;
+                    b5.style.backgroundColor = 'red';
+                }
+                else{
+                    checklist[5] = true;
+                    b5.style.backgroundColor = 'lime';
+                }
+            }
+            //Below are all of my animation functions, these functions start the aniamtions when called.
+            //I got this idea from a stackoverflow article here:
+            //https://stackoverflow.com/questions/53581270/how-to-animate-svg-animate-tag-on-scroll
+            var eyeani1 = document.querySelector('#eyeani1');
+            var eyeani2 = document.querySelector('#eyeani2');
+            var eyeani4 = document.querySelector('#eyeani4');   //creating variables for the move eyes animations
+            var eyeani3 = document.querySelector('#eyeani3');
+            const moveEyes = function(){   //when this function is called all of the eyeani animations have their begin attribute changed from indefinite to 1s, staring the animation
+                eyeani1.beginElement('1s');
+                eyeani2.beginElement('1s');
+                eyeani3.beginElement('1s');
+                eyeani4.beginElement('1s');
+            }
+            var colorani = document.querySelector('#colorani');
+            var colorani2 = document.querySelector('#colorani2'); //creating variables for the disco eyes animations
+            const discoEyes = function(){//when this function is called all of the colorani animations have their begin attribute changed from indefinite to 1s, staring the animation
+                colorani.beginElement('1s');
+                colorani2.beginElement('1s');
+            }
+            var hideghost = document.querySelector('#hideghost');//creating variables for the disappear/reappear animations
+            var showghost = document.querySelector('#showghost');
+            const ghosthider= function(){
+                if(ishidden==false){   //function checks if the ghost is currently hidden if it isnt hide it, if it is make it reappear
+                    hideghost.beginElement('1s');
+                    ishidden=true; //update ishidden boolean
+                }
+                else{
+                    showghost.beginElement('1s');
+                    ishidden = false;//update ishidden boolean
+                }
+            }
+            var browani1 = document.querySelector('#browani1');
+            var browani2 = document.querySelector('#browani2');
+            var browani3 = document.querySelector('#browani3');
+            var browani4 = document.querySelector('#browani4');
+            const browmover = function(){
+                browani1.beginElement('1s');
+                browani2.beginElement('1s');
+                browani3.beginElement('1s');
+                browani4.beginElement('1s');
+            }
+            var pupilani1 = document.querySelector('#pupilani1');
+            var pupilani2 = document.querySelector('#pupilani2');
+            const pupilSpin = function(){
+                pupilani1.beginElement('1s');
+                pupilani2.beginElement('1s');
+            }
+            var oneEyebrowani1 = document.querySelector('#oneEyebrowani1');
+            var oneEyebrowani2 = document.querySelector('#oneEyebrowani2');
+            var oneEyebrowani3 = document.querySelector('#oneEyebrowani3');
+            var oneEyebrowani4 = document.querySelector('#oneEyebrowani4');
+            var oneEyeani1 = document.querySelector('#oneEyeani1');
+            var oneEyeani2 = document.querySelector('#oneEyeani2');
+            var oneEyeani3 = document.querySelector('#oneEyeani3');
+            var oneEyeani4 = document.querySelector('#oneEyeani4');     //these variables are for the one eyed effect, I created two animations for each shape as I wanted the effect to both remain as long as desired and be reversable
+            var oneEyebrowani1p2 = document.querySelector('#oneEyebrowani1p2'); 
+            var oneEyebrowani2p2 = document.querySelector('#oneEyebrowani2p2');
+            var oneEyebrowani3p2 = document.querySelector('#oneEyebrowani3p2');
+            var oneEyebrowani4p2 = document.querySelector('#oneEyebrowani4p2');
+            var oneEyeani1p2 = document.querySelector('#oneEyeani1p2');
+            var oneEyeani2p2 = document.querySelector('#oneEyeani2p2');
+            var oneEyeani3p2 = document.querySelector('#oneEyeani3p2');
+            var oneEyeani4p2 = document.querySelector('#oneEyeani4p2');
+            const oneEyemode = function(){ // plays and reverses the one eyed effect
+                if(oneEyed==false){  //if the ghost has two eyes begin these animations
+                    oneEyebrowani1.beginElement('1s');
+                    oneEyebrowani2.beginElement('1s');
+                    oneEyebrowani3.beginElement('1s');
+                    oneEyebrowani4.beginElement('1s');
+                    oneEyeani1.beginElement('1s');
+                    oneEyeani2.beginElement('1s');
+                    oneEyeani3.beginElement('1s');
+                    oneEyeani4.beginElement('1s');
+                    oneEyed=true;//update oneEyed boolean
+                }
+                else{//otherwise the ghost has one eye, begin these animations
+                    oneEyebrowani1p2.beginElement('1s');
+                    oneEyebrowani2p2.beginElement('1s');
+                    oneEyebrowani3p2.beginElement('1s');
+                    oneEyebrowani4p2.beginElement('1s');
+                    oneEyeani1p2.beginElement('1s');
+                    oneEyeani2p2.beginElement('1s');
+                    oneEyeani3p2.beginElement('1s');
+                    oneEyeani4p2.beginElement('1s');
+                    oneEyed=false;//update oneEyed boolean
+                }
+            }
+
+            //this final function is for altering between displaying the svg and its source code.
+            //I added and remove the display and hide classes to the text div and set the svg style.display to either block or hide.
+            // since both the text and the svg are inside the same div they occupy the same space 
+            const svglogic = function(){
+                if(text.classList.contains('display')){ //checks if text is currently displayed
+                    text.classList.remove('display');
+                    text.classList.add('hide');
+                    svg.style.display = 'block';
+                }
+                else{
+                    text.classList.remove('hide');
+                    text.classList.add('display');
+                    svg.style.display = 'none';
+                }
+            }
+        </script>
+</body>
+</html>
