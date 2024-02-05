@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.button1 {
+    display: none;
+  background-color: rgb(248, 229, 229);
+  padding: 20px;
+  border-radius:50px;
+  text-align: center;
+  font-size: 10px;
+}
+.button2 {
+  background-color: rgb(248, 229, 229);
+  padding: 20px;
+  border-radius:50px;
+  text-align: center;
+  font-size: 10px;
+}
+.flex-container {
+  display: flex;
+  align-items: center;
+}
+
+.flex-container > div {
+  margin: auto;
+  text-align: center;
+  line-height: 80px;
+  font-size: 20px;
+}
+.shape:hover button{
+    display: block;
+}
+body {
+background-color: white;
+}
+.shape {
+margin: auto;
+}
+.cap {
+width: 0;
+height: 0;
+border-left: 65px solid transparent;
+border-right: 65px solid transparent;
+border-bottom: 80px solid red;
+}
+.a {
+width: 0;
+height: 0;
+border-left: 60px solid transparent;
+border-right: 60px solid transparent;
+border-bottom: 20px solid white;
+}
+.one {
+border-bottom: 65px solid red;
+border-left: 55px solid transparent;
+border-right: 55px solid transparent;
+height: 0;
+width: 130px;
+}
+.b{
+  width: 0;
+height: 0;
+border-left: 60px solid transparent;
+border-right: 60px solid transparent;
+border-bottom: 20px solid white;
+}
+.two {
+border-bottom: 80px solid orange;
+border-left: 55px solid transparent;
+border-right: 55px solid transparent;
+height: 0;
+width: 260px;
+}
+.three {
+  border-bottom: 80px solid yellow;
+  border-left: 60px solid transparent;
+  border-right: 60px solid transparent;
+  height: 0;
+  width: 390px;
+}
+.four {
+  border-bottom: 100px solid cyan;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  height: 0;
+  width: 510px;
+}
+.five {
+  border-bottom: 100px solid #CD7F32;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  height: 0;
+  width: 670px;
+}
+.six {
+  border-bottom: 100px solid lime;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  height: 0;
+  width: 830px;
+}
+</style>
+</head>
+<body>
+<script>
+var buttonTarget = document.getElementsByClassName("btn");
+var counter1 = 0;
+var counter2 = 0;
+var counter3 = 0;
+var counter4 = 0;
+var counter5 = 0;
+var counter6 = 0;
+
+function incrementer(){
+ document.getElementById("btn").innerHTML = counter1.toString();
+  buttonTarget.innerHTML  = counter1.toString();
+  counter1++;
+  return counter1;
+}
+function incrementer2(){
+ document.getElementById("btn2").innerHTML = counter2.toString();
+  buttonTarget.innerHTML  = counter2.toString();
+  counter2++;
+  return counter2;
+}
+function incrementer3(){
+ document.getElementById("btn3").innerHTML = counter3.toString();
+  buttonTarget.innerHTML  = counter3.toString();
+  counter3++;
+  return counter3;
+}
+function incrementer4(){
+ document.getElementById("btn4").innerHTML = counter4.toString();
+  buttonTarget.innerHTML  = counter4.toString();
+  counter4++;
+  return counter4;
+}
+function incrementer5(){
+ document.getElementById("btn5").innerHTML = counter5.toString();
+  buttonTarget.innerHTML  = counter5.toString();
+  counter5++;
+  return counter5;
+}
+function incrementer6(){
+ document.getElementById("btn6").innerHTML = counter6.toString();
+  buttonTarget.innerHTML  = counter6.toString();
+  counter6++;
+  return counter6;
+}
+function decrementer(){
+ document.getElementById("btn").innerHTML = counter1.toString();
+  buttonTarget.innerHTML  = counter1.toString();
+  counter1--;
+  return counter1;
+}
+function decrementer2(){
+ document.getElementById("btn2").innerHTML = counter2.toString();
+  buttonTarget.innerHTML  = counter2.toString();
+  counter2--;
+  return counter2;
+}
+function decrementer3(){
+ document.getElementById("btn3").innerHTML = counter3.toString();
+  buttonTarget.innerHTML  = counter3.toString();
+  counter3--;
+  return counter3;
+}
+function decrementer4(){
+ document.getElementById("btn4").innerHTML = counter4.toString();
+  buttonTarget.innerHTML  = counter4.toString();
+  counter4--;
+  return counter4;
+}
+function decrementer5(){
+ document.getElementById("btn5").innerHTML = counter5.toString();
+  buttonTarget.innerHTML  = counter5.toString();
+  counter5--;
+  return counter5;
+}
+function decrementer6(){
+ document.getElementById("btn6").innerHTML = counter6.toString();
+  buttonTarget.innerHTML  = counter6.toString();
+  counter6--;
+  return counter6;
+}
+</script>
+<div class="shape cap"></div>
+<div class="shape one">
+    <div class="flex-container">   
+        <div class="button"><button type="button" class="btn button1" id="bn" onclick="incrementer()">+</button></div>
+        <div class="button"><button type="button" class="btn button2" id="btn">0</button></div>
+        <div class="button"><button type="button" class="btn button1" id="b" onclick="decrementer()">-</button></div>
+    </div>
+</div>
+<div class="shape a"></div>
+<div class="shape two">
+    <div class="flex-container">
+        <div class="button"><button type="button" class="btn button1" id="bn" onclick="incrementer2()">+</button></div>
+        <div class="button"><button type="button" class="btn button2" id="btn2">0</button></div>
+        <div class="button"><button type="button" class="btn button1" id="b" onclick="decrementer2()">-</button></div>
+    </div>
+</div>
+<div class="shape b"></div>
+<div class="shape three">
+    <div class="flex-container">
+        <div class="button"><button type="button" class="btn button1" id="bn" onclick="incrementer3()">+</button></div>
+        <div class="button"><button type="button" class="btn button2" id="btn3">0</button></div>
+        <div class="button"><button type="button" class="btn button1" id="b" onclick="decrementer3()">-</button></div>
+    </div>
+</div>
+<div class="shape four">
+    <div class="flex-container">
+        <div class="button"><button type="button" class="btn button1" id="bn" onclick="incrementer4()">+</button></div>
+        <div class="button"><button type="button" class="btn button2" id="btn4">0</button></div>
+        <div class="button"><button type="button" class="btn button1" id="b" onclick="decrementer4()">-</button></div>
+    </div>
+</div>
+<div class="shape five">
+    <div class="flex-container">
+        <div class="button"><button type="button" class="btn button1" id="bn" onclick="incrementer5()">+</button></div>
+        <div class="button"><button type="button" class="btn button2" id="btn5">0</button></div>
+        <div class="button"><button type="button" class="btn button1" id="b" onclick="decrementer5()">-</button></div>
+    </div>
+</div>
+<div class="shape six">
+    <div class="flex-container">
+        <div class="button"><button type="button" class="btn button1" id="bn" onclick="incrementer6()">+</button></div>
+        <div class="button"><button type="button" class="btn button2" id="btn6">0</button></div>
+        <div class="button"><button type="button" class="btn button1" id="b" onclick="decrementer6()">-</button></div>
+    </div> 
+</div>
+<h1>Todays Date:</h1>
+<form action="/action_page.php">
+    <label for="day">Today is?:</label>
+    <input type="date" id="day" name="day">
+  </form>
+  
+</body>
+</html>
