@@ -1,4 +1,4 @@
-// Code can convert any one of the 4 formats to another so long as they follow valid input syntax
+// Code can convert any one of the 4 formats to another so long as they follow valid input syntax (CSV,JSON,MD,HTML)
 // to change the table input replace the already existing table files ie (csvfile.CSV,textFile.JSON,mdFile.MD)
 // these file names are hardcoded as inputs so keeping the names is vital for functionally howere file content can be changed freely
 // so long as it is valid for example textFile.JSON will work if it has valid JSON
