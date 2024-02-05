@@ -1,2 +1,2 @@
 # CollegeWork
-A collection of work completed for assignments 
+A collection of work I completed for assignments in university.
