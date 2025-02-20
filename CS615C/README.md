@@ -26,4 +26,3 @@ git push origin <branch-name>
 Pull Changes from Remote Repository
 git pull
 
-You can copy this text and save it as a `.md` file. If you need any more help, feel free to ask!
